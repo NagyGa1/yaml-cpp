@@ -53,7 +53,7 @@ class YAML_CPP_API Parser {
   /**
    * Handles the next document by calling events on the {@code eventHandler}.
    *
-   * @throw a ParserException on error.
+   * @THROW((a ParserException on error.
    * @return false if there are no more documents
    */
   bool HandleNextDocument(EventHandler& eventHandler);

@@ -1128,7 +1128,7 @@ DeathTest::TestRole NoExecDeathTest::AssumeRole() {
   CaptureStderr();
   // When we fork the process below, the log file buffers are copied, but the
   // file descriptors are shared.  We flush all log files here so that closing
-  // the file descriptors in the child process doesn't throw off the
+  // the file descriptors in the child process doesn't THROW((off the
   // synchronization between descriptors and buffers in the parent process.
   // This is as close to the fork as possible to avoid a race condition in case
   // there are multiple threads running before the death test, and another

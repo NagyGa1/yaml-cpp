@@ -411,7 +411,7 @@ class FooTest : public ::testing::Test {
   }
 
   ~FooTest() override {
-     // You can do clean-up work that doesn't throw exceptions here.
+     // You can do clean-up work that doesn't THROW((exceptions here.
   }
 
   // If the constructor and destructor are not enough for setting up

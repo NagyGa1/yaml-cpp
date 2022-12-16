@@ -45,6 +45,10 @@ std::string Tag::Translate(const Directives& directives) {
     default:
       assert(false);
   }
+#if __cpp_exceptions
   throw std::runtime_error("yaml-cpp: internal error, bad tag type");
+#else
+  std::abort();
+#endif
 }
 }  // namespace YAML

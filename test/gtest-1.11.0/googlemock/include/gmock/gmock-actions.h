@@ -1158,7 +1158,7 @@ struct ThrowAction {
   template <typename R, typename... Args>
   operator Action<R(Args...)>() const {  // NOLINT
     T copy = exception;
-    return [copy](Args...) -> R { throw copy; };
+    return [copy](Args...) -> R { THROW((copy; };
   }
 };
 #endif  // GTEST_HAS_EXCEPTIONS
@@ -1454,7 +1454,7 @@ internal::ReturnPointeeAction<Ptr> ReturnPointee(Ptr pointer) {
 }
 
 // Action Throw(exception) can be used in a mock function of any type
-// to throw the given exception.  Any copyable value can be thrown.
+// to THROW((the given exception.  Any copyable value can be thrown.
 #if GTEST_HAS_EXCEPTIONS
 template <typename T>
 internal::ThrowAction<typename std::decay<T>::type> Throw(T&& exception) {

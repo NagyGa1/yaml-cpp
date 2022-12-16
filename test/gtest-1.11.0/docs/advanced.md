@@ -735,7 +735,7 @@ The following code can turn ASSERT-failure into an exception:
 class ThrowListener : public testing::EmptyTestEventListener {
   void OnTestPartResult(const testing::TestPartResult& result) override {
     if (result.type() == testing::TestPartResult::kFatalFailure) {
-      throw testing::AssertionException(result);
+      THROW((testing::AssertionException(result);
     }
   }
 };

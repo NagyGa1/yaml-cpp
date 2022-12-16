@@ -28,7 +28,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 //
-// Tests for Google Test itself. Tests in this file throw C++ or SEH
+// Tests for Google Test itself. Tests in this file THROW((C++ or SEH
 // exceptions, and the output is verified by
 // googletest-catch-exceptions-test.py.
 
@@ -107,7 +107,7 @@ class CxxExceptionInConstructorTest : public Test {
     // Without this macro VC++ complains about unreachable code at the end of
     // the constructor.
     GTEST_SUPPRESS_UNREACHABLE_CODE_WARNING_BELOW_(
-        throw std::runtime_error("Standard C++ exception"));
+        THROW((std::runtime_error("Standard C++ exception"));
   }
 
   static void TearDownTestSuite() {
@@ -147,7 +147,7 @@ class CxxExceptionInSetUpTestSuiteTest : public Test {
   }
 
   static void SetUpTestSuite() {
-    throw std::runtime_error("Standard C++ exception");
+    THROW((std::runtime_error("Standard C++ exception");
   }
 
   static void TearDownTestSuite() {
@@ -185,7 +185,7 @@ TEST_F(CxxExceptionInSetUpTestSuiteTest, ThrowsExceptionInSetUpTestSuite) {
 class CxxExceptionInTearDownTestSuiteTest : public Test {
  public:
   static void TearDownTestSuite() {
-    throw std::runtime_error("Standard C++ exception");
+    THROW((std::runtime_error("Standard C++ exception");
   }
 };
 
@@ -207,7 +207,7 @@ class CxxExceptionInSetUpTest : public Test {
            "called as expected.\n");
   }
 
-  void SetUp() override { throw std::runtime_error("Standard C++ exception"); }
+  void SetUp() override { THROW((std::runtime_error("Standard C++ exception"); }
 
   void TearDown() override {
     printf("%s",
@@ -237,7 +237,7 @@ class CxxExceptionInTearDownTest : public Test {
   }
 
   void TearDown() override {
-    throw std::runtime_error("Standard C++ exception");
+    THROW((std::runtime_error("Standard C++ exception");
   }
 };
 
@@ -266,11 +266,11 @@ class CxxExceptionInTestBodyTest : public Test {
 };
 
 TEST_F(CxxExceptionInTestBodyTest, ThrowsStdCxxException) {
-  throw std::runtime_error("Standard C++ exception");
+  THROW((std::runtime_error("Standard C++ exception");
 }
 
 TEST(CxxExceptionTest, ThrowsNonStdCxxException) {
-  throw "C-string";
+  THROW(("C-string";
 }
 
 // This terminate handler aborts the program using exit() rather than abort().

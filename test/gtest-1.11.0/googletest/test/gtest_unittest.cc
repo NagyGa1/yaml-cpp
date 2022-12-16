@@ -3360,10 +3360,10 @@ TEST_F(SingleEvaluationTest, OtherCases) {
 #endif  // GTEST_HAS_RTTI
 
 void ThrowAnInteger() {
-  throw 1;
+  THROW((1;
 }
 void ThrowRuntimeError(const char* what) {
-  throw std::runtime_error(what);
+  THROW((std::runtime_error(what);
 }
 
 // Tests that assertion arguments are evaluated exactly once.
@@ -3851,11 +3851,11 @@ TEST(AssertionTest, ASSERT_THROW) {
 TEST(AssertionTest, ASSERT_NO_THROW) {
   ASSERT_NO_THROW(ThrowNothing());
   EXPECT_FATAL_FAILURE(ASSERT_NO_THROW(ThrowAnInteger()),
-                       "Expected: ThrowAnInteger() doesn't throw an exception."
+                       "Expected: ThrowAnInteger() doesn't THROW((an exception."
                        "\n  Actual: it throws.");
   EXPECT_FATAL_FAILURE(ASSERT_NO_THROW(ThrowRuntimeError("A description")),
                        "Expected: ThrowRuntimeError(\"A description\") "
-                       "doesn't throw an exception.\n  "
+                       "doesn't THROW((an exception.\n  "
                        "Actual: it throws " ERROR_DESC " "
                        "with description \"A description\".");
 }
@@ -4163,17 +4163,17 @@ TEST(AssertionSyntaxTest, BasicAssertionsBehavesLikeSingleStatement) {
 TEST(ExpectThrowTest, DoesNotGenerateUnreachableCodeWarning) {
   int n = 0;
 
-  EXPECT_THROW(throw 1, int);
+  EXPECT_THROW(THROW((1, int);
   EXPECT_NONFATAL_FAILURE(EXPECT_THROW(n++, int), "");
-  EXPECT_NONFATAL_FAILURE(EXPECT_THROW(throw 1, const char*), "");
+  EXPECT_NONFATAL_FAILURE(EXPECT_THROW(THROW((1, const char*), "");
   EXPECT_NO_THROW(n++);
-  EXPECT_NONFATAL_FAILURE(EXPECT_NO_THROW(throw 1), "");
-  EXPECT_ANY_THROW(throw 1);
+  EXPECT_NONFATAL_FAILURE(EXPECT_NO_THROW(THROW((1), "");
+  EXPECT_ANY_THROW(THROW((1);
   EXPECT_NONFATAL_FAILURE(EXPECT_ANY_THROW(n++), "");
 }
 
 TEST(ExpectThrowTest, DoesNotGenerateDuplicateCatchClauseWarning) {
-  EXPECT_THROW(throw std::exception(), std::exception);
+  EXPECT_THROW(THROW((std::exception(), std::exception);
 }
 
 // The following code intentionally tests a suboptimal syntax.
@@ -4276,7 +4276,7 @@ TEST(AssertionSyntaxTest, WorksWithSwitch) {
 #if GTEST_HAS_EXCEPTIONS
 
 void ThrowAString() {
-    throw "std::string";
+    THROW(("std::string";
 }
 
 // Test that the exception assertion macros compile and work with const
@@ -4623,11 +4623,11 @@ TEST(ExpectTest, EXPECT_THROW) {
 TEST(ExpectTest, EXPECT_NO_THROW) {
   EXPECT_NO_THROW(ThrowNothing());
   EXPECT_NONFATAL_FAILURE(EXPECT_NO_THROW(ThrowAnInteger()),
-                          "Expected: ThrowAnInteger() doesn't throw an "
+                          "Expected: ThrowAnInteger() doesn't THROW((an "
                           "exception.\n  Actual: it throws.");
   EXPECT_NONFATAL_FAILURE(EXPECT_NO_THROW(ThrowRuntimeError("A description")),
                           "Expected: ThrowRuntimeError(\"A description\") "
-                          "doesn't throw an exception.\n  "
+                          "doesn't THROW((an exception.\n  "
                           "Actual: it throws " ERROR_DESC " "
                           "with description \"A description\".");
 }

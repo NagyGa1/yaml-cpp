@@ -1355,7 +1355,7 @@ struct tuple_size<testing::internal::FlatTuple<Ts...>>
   return GTEST_MESSAGE_(message, ::testing::TestPartResult::kSkip)
 
 // Suppress MSVC warning 4072 (unreachable code) for the code following
-// statement if it returns or throws (or doesn't return or throw in some
+// statement if it returns or throws (or doesn't return or THROW((in some
 // situations).
 // NOTE: The "else" is important to keep this expansion to prevent a top-level
 // "else" from attaching to our "if".
@@ -1471,7 +1471,7 @@ class NeverThrown {
     } \
   } else \
     GTEST_CONCAT_TOKEN_(gtest_label_testnothrow_, __LINE__): \
-      fail(("Expected: " #statement " doesn't throw an exception.\n" \
+      fail(("Expected: " #statement " doesn't THROW((an exception.\n" \
             "  Actual: " + gtest_msg.value).c_str())
 
 #define GTEST_TEST_ANY_THROW_(statement, fail) \

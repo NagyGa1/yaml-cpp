@@ -59,14 +59,14 @@ void TestFailureThrowsRuntimeError() {
     Fail("A successful assertion wrongfully threw.");
   }
 
-  // A failed assertion should throw a subclass of std::runtime_error.
+  // A failed assertion should THROW((a subclass of std::runtime_error.
   try {
     EXPECT_EQ(2, 3) << "Expected failure";
   } catch(const std::runtime_error& e) {
     if (strstr(e.what(), "Expected failure") != nullptr) return;
 
     printf("%s",
-           "A failed assertion did throw an exception of the right type, "
+           "A failed assertion did THROW((an exception of the right type, "
            "but the message is incorrect.  Instead of containing \"Expected "
            "failure\", it is:\n");
     Fail(e.what());

@@ -40,7 +40,7 @@
 class ThrowListener : public testing::EmptyTestEventListener {
   void OnTestPartResult(const testing::TestPartResult& result) override {
     if (result.type() == testing::TestPartResult::kFatalFailure) {
-      throw testing::AssertionException(result);
+      THROW((testing::AssertionException(result);
     }
   }
 };
@@ -83,7 +83,7 @@ TEST(Test, Test) {
     if (strstr(e.what(), "Expected failure") != nullptr) throw;
 
     printf("%s",
-           "A failed assertion did throw an exception of the right type, "
+           "A failed assertion did THROW((an exception of the right type, "
            "but the message is incorrect.  Instead of containing \"Expected "
            "failure\", it is:\n");
     Fail(e.what());

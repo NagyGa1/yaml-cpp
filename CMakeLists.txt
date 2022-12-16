@@ -25,6 +25,8 @@ option(YAML_BUILD_SHARED_LIBS "Build yaml-cpp shared library" ${BUILD_SHARED_LIB
 option(YAML_CPP_INSTALL "Enable generation of yaml-cpp install targets" ${YAML_CPP_MAIN_PROJECT})
 option(YAML_CPP_FORMAT_SOURCE "Format source" ON)
 
+#add_compile_options(-fno-exceptions)
+
 if (YAML_CPP_BUILD_TESTS)
     include(CTest)
 endif()

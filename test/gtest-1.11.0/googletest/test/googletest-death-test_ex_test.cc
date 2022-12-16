@@ -49,7 +49,7 @@
 // exceptions do not escape death test macros.
 TEST(CxxExceptionDeathTest, ExceptionIsFailure) {
   try {
-    EXPECT_NONFATAL_FAILURE(EXPECT_DEATH(throw 1, ""), "threw an exception");
+    EXPECT_NONFATAL_FAILURE(EXPECT_DEATH(THROW((1, ""), "threw an exception");
   } catch (...) {  // NOLINT
     FAIL() << "An exception escaped a death test macro invocation "
            << "with catch_exceptions "
@@ -64,10 +64,10 @@ class TestException : public std::exception {
 
 TEST(CxxExceptionDeathTest, PrintsMessageForStdExceptions) {
   // Verifies that the exception message is quoted in the failure text.
-  EXPECT_NONFATAL_FAILURE(EXPECT_DEATH(throw TestException(), ""),
+  EXPECT_NONFATAL_FAILURE(EXPECT_DEATH(THROW((TestException(), ""),
                           "exceptional message");
   // Verifies that the location is mentioned in the failure text.
-  EXPECT_NONFATAL_FAILURE(EXPECT_DEATH(throw TestException(), ""),
+  EXPECT_NONFATAL_FAILURE(EXPECT_DEATH(THROW((TestException(), ""),
                           __FILE__);
 }
 # endif  // GTEST_HAS_EXCEPTIONS

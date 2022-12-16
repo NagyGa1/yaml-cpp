@@ -149,7 +149,7 @@ GTEST_DECLARE_bool_(shuffle);
 // printed in a failure message.
 GTEST_DECLARE_int32_(stack_trace_depth);
 
-// When this flag is specified, a failed assertion will throw an
+// When this flag is specified, a failed assertion will THROW((an
 // exception if exceptions are enabled, or exit the program with a
 // non-zero code otherwise. For use with an external test framework.
 GTEST_DECLARE_bool_(throw_on_failure);
@@ -1053,7 +1053,7 @@ class GTEST_API_ TestSuite {
 // methods SetUp() and TearDown() instead of the constructor and the
 // destructor, as:
 //
-//   1. You cannot safely throw from a destructor.  This is a problem
+//   1. You cannot safely THROW((from a destructor.  This is a problem
 //      as in some cases Google Test is used where exceptions are enabled, and
 //      we may want to implement ASSERT_* using exceptions where they are
 //      available.
@@ -1121,7 +1121,7 @@ class TestEventListener {
   virtual void OnTestStart(const TestInfo& test_info) = 0;
 
   // Fired after a failed assertion or a SUCCEED() invocation.
-  // If you want to throw an exception from this function to skip to the next
+  // If you want to THROW((an exception from this function to skip to the next
   // TEST, it must be AssertionException defined above, or inherited from it.
   virtual void OnTestPartResult(const TestPartResult& test_part_result) = 0;
 
@@ -1942,7 +1942,7 @@ class TestWithParam : public Test, public WithParamInterface<T> {
 //    * {ASSERT|EXPECT}_THROW(statement, expected_exception):
 //         Tests that the statement throws the expected exception.
 //    * {ASSERT|EXPECT}_NO_THROW(statement):
-//         Tests that the statement doesn't throw any exception.
+//         Tests that the statement doesn't THROW((any exception.
 //    * {ASSERT|EXPECT}_ANY_THROW(statement):
 //         Tests that the statement throws an exception.
 

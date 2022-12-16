@@ -1528,7 +1528,7 @@ class FunctionMocker<R(Args...)> final : public UntypedFunctionMockerBase {
         "set, and its return type has no default value set.";
 #if GTEST_HAS_EXCEPTIONS
     if (!DefaultValue<Result>::Exists()) {
-      throw std::runtime_error(message);
+      THROW((std::runtime_error(message);
     }
 #else
     Assert(DefaultValue<Result>::Exists(), "", -1, message);

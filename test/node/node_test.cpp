@@ -31,7 +31,7 @@ class CustomAllocator : public std::allocator<T> {
     ~CustomAllocator() {}
     size_type max_size() const { return (std::numeric_limits<std::ptrdiff_t>::max)()/sizeof(T); }
     pointer allocate(size_type num, const void* /*hint*/ = 0) {
-      if (num > std::size_t(-1) / sizeof(T)) throw std::bad_alloc();
+      if (num > std::size_t(-1) / sizeof(T)) THROW((std::bad_alloc();
       return static_cast<pointer>(malloc(num * sizeof(T)));
     }
     void deallocate(pointer p, size_type /*num*/) { free(p); }

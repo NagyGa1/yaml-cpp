@@ -620,7 +620,7 @@ TEST(ExpectNonfatalFailureTest, FailsWhenStatementThrows) {
   printf("(expecting a failure)\n");
   try {
     EXPECT_NONFATAL_FAILURE({
-      throw 0;
+      THROW((0;
     }, "");
   } catch(int) {  // NOLINT
   }
@@ -703,7 +703,7 @@ TEST(ExpectFatalFailureTest, FailsWhenStatementThrows) {
   printf("(expecting a failure)\n");
   try {
     EXPECT_FATAL_FAILURE({
-      throw 0;
+      THROW((0;
     }, "");
   } catch(int) {  // NOLINT
   }

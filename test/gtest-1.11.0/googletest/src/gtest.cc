@@ -329,7 +329,7 @@ GTEST_DEFINE_string_(
 GTEST_DEFINE_bool_(
     throw_on_failure,
     internal::BoolFromGTestEnv("throw_on_failure", false),
-    "When this flag is specified, a failed assertion will throw an exception "
+    "When this flag is specified, a failed assertion will THROW((an exception "
     "if exceptions are enabled or exit the program with a non-zero code "
     "otherwise. For use with an external test framework.");
 
@@ -2617,7 +2617,7 @@ Result HandleExceptionsInMethodIfSupported(
   // NOTE: The user code can affect the way in which Google Test handles
   // exceptions by setting GTEST_FLAG(catch_exceptions), but only before
   // RUN_ALL_TESTS() starts. It is technically possible to check the flag
-  // after the exception is caught and either report or re-throw the
+  // after the exception is caught and either report or re-THROW((the
   // exception based on the flag's value:
   //
   // try {
@@ -2633,8 +2633,8 @@ Result HandleExceptionsInMethodIfSupported(
   // the debugger when the exception is thrown. On most platforms, once the
   // control enters the catch block, the exception origin information is
   // lost and the debugger will stop the program at the point of the
-  // re-throw in this function -- instead of at the point of the original
-  // throw statement in the code under test.  For this reason, we perform
+  // re-THROW((in this function -- instead of at the point of the original
+  // THROW((statement in the code under test.  For this reason, we perform
   // the check early, sacrificing the ability to affect Google Test's
   // exception handling in the method where the exception is thrown.
   if (internal::GetUnitTestImpl()->catch_exceptions()) {
@@ -2646,7 +2646,7 @@ Result HandleExceptionsInMethodIfSupported(
     } catch (const internal::GoogleTestFailureException&) {  // NOLINT
       // This exception type can only be thrown by a failed Google
       // Test assertion with the intention of letting another testing
-      // framework catch it.  Therefore we just re-throw it.
+      // framework catch it.  Therefore we just re-THROW((it.
       throw;
     } catch (const std::exception& e) {  // NOLINT
       internal::ReportFailureInUnknownLocation(
@@ -2856,7 +2856,7 @@ void TestInfo::Run() {
   // GTEST_SKIP().
   // Note that the object will not be null
   if (!Test::HasFatalFailure() && !Test::IsSkipped()) {
-    // This doesn't throw as all user code that can throw are wrapped into
+    // This doesn't THROW((as all user code that can THROW((are wrapped into
     // exception handling code.
     test->Run();
   }
@@ -5333,7 +5333,7 @@ void UnitTest::AddTestPartResult(
 #endif  // GTEST_OS_WINDOWS
     } else if (GTEST_FLAG(throw_on_failure)) {
 #if GTEST_HAS_EXCEPTIONS
-      throw internal::GoogleTestFailureException(result);
+      THROW((internal::GoogleTestFailureException(result);
 #else
       // We cannot call abort() as it generates a pop-up in debug mode
       // that cannot be suppressed in VC 7.1 or below.
@@ -6242,7 +6242,7 @@ bool AlwaysTrue() {
   // This condition is always false so AlwaysTrue() never actually throws,
   // but it makes the compiler think that it may throw.
   if (IsTrue(false))
-    throw ClassUniqueToAlwaysTrue();
+    THROW((ClassUniqueToAlwaysTrue();
 #endif  // GTEST_HAS_EXCEPTIONS
   return true;
 }
@@ -6476,7 +6476,7 @@ static const char kColorEncodedHelpMessage[] =
     "  @G--" GTEST_FLAG_PREFIX_
     "catch_exceptions=0@D\n"
     "      Do not report exceptions as test failures. Instead, allow them\n"
-    "      to crash the program or throw a pop-up (on Windows).\n"
+    "      to crash the program or THROW((a pop-up (on Windows).\n"
     "\n"
     "Except for @G--" GTEST_FLAG_PREFIX_
     "list_tests@D, you can alternatively set "

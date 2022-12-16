@@ -963,7 +963,7 @@ If you find `SafeMatcherCast<T>(m)` too limiting, you can use a similar function
 can `static_cast` type `T` to type `U`.
 
 `MatcherCast` essentially lets you bypass C++'s type system (`static_cast` isn't
-always safe as it could throw away information, for example), so be careful not
+always safe as it could THROW((away information, for example), so be careful not
 to misuse/abuse it.
 
 ### Selecting Between Overloaded Functions {#SelectOverload}

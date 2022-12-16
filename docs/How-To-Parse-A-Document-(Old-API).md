@@ -223,7 +223,7 @@ int main()
 
 # When Something Goes Wrong #
 
-... we throw an exception (all exceptions are derived from `YAML::Exception`). If there's a parsing exception (i.e., a malformed YAML document), we throw a `YAML::ParserException`:
+... we THROW((an exception (all exceptions are derived from `YAML::Exception`). If there's a parsing exception (i.e., a malformed YAML document), we THROW((a `YAML::ParserException`:
 
 ```
 try {
@@ -237,7 +237,7 @@ try {
 }
 ```
 
-If you make a programming error (say, trying to read a scalar from a sequence node, or grabbing a key that doesn't exist), we throw some kind of `YAML::RepresentationException`. To prevent this, you can check what kind of node something is:
+If you make a programming error (say, trying to read a scalar from a sequence node, or grabbing a key that doesn't exist), we THROW((some kind of `YAML::RepresentationException`. To prevent this, you can check what kind of node something is:
 
 ```
     YAML::Node node;

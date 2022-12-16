@@ -25,12 +25,16 @@ class NullEventHandler : public YAML::EventHandler {
 };
 
 void parse(std::istream& input) {
+#if __cpp_exceptions
   try {
+#endif
     YAML::Node doc = YAML::Load(input);
     std::cout << doc << "\n";
+#if __cpp_exceptions
   } catch (const YAML::Exception& e) {
     std::cerr << e.what() << "\n";
   }
+#endif
 }
 
 int main(int argc, char** argv) {

@@ -586,7 +586,7 @@ TEST(ThrowActionTest, Times0) {
       [] {
         try {
           MockObject m;
-          ON_CALL(m, Func()).WillByDefault([] { throw "something"; });
+          ON_CALL(m, Func()).WillByDefault([] { THROW(("something"; });
           EXPECT_CALL(m, Func()).Times(0);
           m.Func();
         } catch (...) {

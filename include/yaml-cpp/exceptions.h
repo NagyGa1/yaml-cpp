@@ -14,6 +14,12 @@
 #include <stdexcept>
 #include <string>
 
+#if __cpp_exceptions
+#define THROW(exception) (throw exception)
+#else
+#define THROW(exception) (std::abort())
+#endif
+
 namespace YAML {
 // error messages
 namespace ErrorMsg {

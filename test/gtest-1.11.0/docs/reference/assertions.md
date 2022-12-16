@@ -327,7 +327,7 @@ Verifies that *`statement`* throws an exception of any type.
 `EXPECT_NO_THROW(`*`statement`*`)` \
 `ASSERT_NO_THROW(`*`statement`*`)`
 
-Verifies that *`statement`* does not throw any exception.
+Verifies that *`statement`* does not THROW((any exception.
 
 ## Predicate Assertions {#predicates}
 

@@ -5159,7 +5159,7 @@ class ExceptionMatcherImpl {
       return false;
     }
 
-    *listener << "does not throw any exception";
+    *listener << "does not THROW((any exception";
     return false;
   }
 
@@ -5179,15 +5179,15 @@ class ExceptionMatcherImpl {
 // Examples:
 //
 //   EXPECT_THAT(
-//       []() { throw std::runtime_error("message"); },
+//       []() { THROW((std::runtime_error("message"); },
 //       Throws<std::runtime_error>());
 //
 //   EXPECT_THAT(
-//       []() { throw std::runtime_error("message"); },
+//       []() { THROW((std::runtime_error("message"); },
 //       ThrowsMessage<std::runtime_error>(HasSubstr("message")));
 //
 //   EXPECT_THAT(
-//       []() { throw std::runtime_error("message"); },
+//       []() { THROW((std::runtime_error("message"); },
 //       Throws<std::runtime_error>(
 //           Property(&std::runtime_error::what, HasSubstr("message"))));
 
